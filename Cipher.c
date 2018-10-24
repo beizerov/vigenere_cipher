@@ -7,10 +7,10 @@
 
 #include "Cipher.h"
 
+
 /*
  * This function encrypts incoming text
  */
-
 string Cipher(string key, string text)
 {
     if (text != NULL)
