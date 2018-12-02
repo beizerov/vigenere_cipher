@@ -21,6 +21,11 @@ int main(int argc, string argv[])
         printf("Must be one argument\n");
         return 1;
     }
+    else if (strlen(argv[1]) == 0)
+    {
+        printf("Argument cannot be an empty string\n");
+        return 1;
+    }
     else
     {
         string key = argv[1];
