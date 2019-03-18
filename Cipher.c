@@ -22,8 +22,7 @@ string Cipher(string key, string text)
             return NULL;
         }
 
-        // For buffer
-        int indexator = 0;
+        int buffer_index = 0;
         // key_c is variable for ASCII character in integer value 
         int key_c = 0;
 
@@ -56,39 +55,39 @@ string Cipher(string key, string text)
             // Checks whether a character is a number 
             if (isdigit(text[i]))
             {
-                 buffer[indexator++] = text[i];
+                 buffer[buffer_index++] = text[i];
             }
             // Checks whether the character is a punctuation character
             else if (ispunct(text[i]))
             {
-                 buffer[indexator++] = text[i];
+                 buffer[buffer_index++] = text[i];
             }
             // Checks whether the character is a space character
             else if (isspace(text[i]))
             {
-                 buffer[indexator++] = text[i];
+                 buffer[buffer_index++] = text[i];
             }
             else
             {   
                 // For an uppercase letter 
                 if (isupper(text[i]) && (text[i] + key_c) > 'Z')
                 {
-                     buffer[indexator++] =  text[i] + key_c - 26;
+                     buffer[buffer_index++] =  text[i] + key_c - 26;
                 }
                 // For an lowercase letter
                 else if (islower(text[i]) && (text[i] + key_c) > 'z')
                 {
-                     buffer[indexator++] = text[i] + key_c - 26;
+                     buffer[buffer_index++] = text[i] + key_c - 26;
                 } 
                 else
                 {
-                     buffer[indexator++] = text[i] + key_c;
+                     buffer[buffer_index++] = text[i] + key_c;
                 }
             }    
         }
 
       // terminate string
-      buffer[indexator++] = '\0';
+      buffer[buffer_index++] = '\0';
 
       free(text);
       
