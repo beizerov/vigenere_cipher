@@ -11,44 +11,43 @@
 /*
  * This function encrypts incoming text
  */
-string Cipher(string key, string text)
+string Cipher(string keyword, string text)
 {
     const int LETTER_COUNT = 26;
 	
     if (text != NULL)
     {  
-        // Buffer for chars
-        string buffer = malloc(strlen(text) + 1);
+        string ciphertext = malloc(strlen(text) + 1);
 
-        if (buffer == NULL) {
+        if (ciphertext == NULL) {
             return NULL;
         }
 
-        int buffer_index = 0;
-        // The key_c variable to store the value by which to increase
-        // the symbol value.
-        int key_c = 0;
+        int ciphertext_index = 0;
+        // The value_to_increase variable to store the value by which to 
+        // increase the character value when encrypting.
+        int value_to_increase = 0;
 
-        // Changes characters of the original text into cipher
+        // Changes characters of the original text into ciphertext
         for (int i = 0, j = 0, n = strlen(text); i < n; i++)
         {   
             if (isalpha(text[i]))
             {
-                // Get value for key_c
-                for (int keyLength = strlen(key);;)
+                // Get value for value_to_increase
+                for (int keyLength = strlen(keyword);;)
                 {   
                     if (j == keyLength)
                     {
                         j = 0;  // Return to the first character of the keyword
                         continue;
                     }
-                    else if (isupper(key[j]))
+                    else if (isupper(keyword[j]))
                     {
-                        key_c = (key[j] - 65);
+                        value_to_increase = (keyword[j] - 65);
                     }
-                    else if (islower(key[j]))
+                    else if (islower(keyword[j]))
                     {
-                        key_c = (key[j] - 97);
+                        value_to_increase = (keyword[j] - 97);
                     }
                     
                     j++;  // Next character of keyword.
@@ -58,41 +57,46 @@ string Cipher(string key, string text)
             // Checks whether a character is a number 
             if (isdigit(text[i]))
             {
-                 buffer[buffer_index++] = text[i];
+                 ciphertext[ciphertext_index++] = text[i];
             }
             // Checks whether the character is a punctuation character
             else if (ispunct(text[i]))
             {
-                 buffer[buffer_index++] = text[i];
+                 ciphertext[ciphertext_index++] = text[i];
             }
             // Checks whether the character is a space character
             else if (isspace(text[i]))
             {
-                 buffer[buffer_index++] = text[i];
+                 ciphertext[ciphertext_index++] = text[i];
             }
             else
             {   
-                if (isupper(text[i]) && (text[i] + key_c) > 'Z')
+                if (isupper(text[i]) && (text[i] + value_to_increase) > 'Z')
                 {
-                     buffer[buffer_index++] =  text[i] + key_c - LETTER_COUNT;
+                     ciphertext[ciphertext_index++] =  text[i] 
+                            + value_to_increase - LETTER_COUNT;
                 }
-                else if (islower(text[i]) && (text[i] + key_c) > 'z')
+                else if (
+                         islower(text[i]) && (text[i] + value_to_increase) > 'z'
+                )
                 {
-                     buffer[buffer_index++] = text[i] + key_c - LETTER_COUNT;
+                     ciphertext[ciphertext_index++] = text[i] 
+                            + value_to_increase - LETTER_COUNT;
                 } 
                 else
                 {
-                     buffer[buffer_index++] = text[i] + key_c;
+                     ciphertext[ciphertext_index++] = text[i] 
+                            + value_to_increase;
                 }
             }    
         }
 
       // terminate string
-      buffer[buffer_index++] = '\0';
+      ciphertext[ciphertext_index] = '\0';
 
       free(text);
       
-      return buffer;
+      return ciphertext;
     }
 
     return NULL;

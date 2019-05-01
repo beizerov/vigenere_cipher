@@ -28,26 +28,26 @@ int main(int argc, string argv[])
     }
     else
     {
-        string key = argv[1];
+        string keyword = argv[1];
     
-        for(int i = 0, n = strlen(key); i < n; i++)
+        for(int i = 0, n = strlen(keyword); i < n; i++)
         {
-            if (!(isalpha(key[i])))
+            if (!(isalpha(keyword[i])))
             {
-                printf("Key must be exclusively from the alphabet!\n");
+                printf("Keyword must be exclusively from the alphabet!\n");
                 return 1;
             }
         }  
        
         string text = GetString();
        
-        string result = Cipher(key, text);
+        string ciphertext = Cipher(keyword, text);
 		
-        if (result != NULL) 
+        if (ciphertext != NULL) 
         {
-            printf("%s\n", result);
+            printf("%s\n", ciphertext);
 
-            free(result);
+            free(ciphertext);
         }
     
         return 0;
