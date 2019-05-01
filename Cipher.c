@@ -23,76 +23,66 @@ string Cipher(string keyword, string text)
             return NULL;
         }
 
-        int ciphertext_index = 0;
+        int text_length = strlen(text);
         // The value_to_increase variable to store the value by which to 
         // increase the character value when encrypting.
         int value_to_increase = 0;
 
         // Changes characters of the original text into ciphertext
-        for (int i = 0, j = 0, n = strlen(text); i < n; i++)
+        for (int i = 0, j = 0; i < text_length; i++)
         {   
             if (isalpha(text[i]))
             {
                 // Get value for value_to_increase
-                for (int keyLength = strlen(keyword);;)
+                for (int keyword_length = strlen(keyword);;)
                 {   
-                    if (j == keyLength)
+                    if (j == keyword_length)
                     {
                         j = 0;  // Return to the first character of the keyword
                         continue;
                     }
                     else if (isupper(keyword[j]))
                     {
-                        value_to_increase = (keyword[j] - 65);
+                        value_to_increase = (keyword[j] - 'A');
                     }
                     else if (islower(keyword[j]))
                     {
-                        value_to_increase = (keyword[j] - 97);
+                        value_to_increase = (keyword[j] - 'a');
                     }
                     
                     j++;  // Next character of keyword.
                     break;
                 }
             }
-            // Checks whether a character is a number 
-            if (isdigit(text[i]))
-            {
-                 ciphertext[ciphertext_index++] = text[i];
-            }
-            // Checks whether the character is a punctuation character
-            else if (ispunct(text[i]))
-            {
-                 ciphertext[ciphertext_index++] = text[i];
-            }
-            // Checks whether the character is a space character
-            else if (isspace(text[i]))
-            {
-                 ciphertext[ciphertext_index++] = text[i];
-            }
-            else
+
+            if (isalpha(text[i]))
             {   
                 if (isupper(text[i]) && (text[i] + value_to_increase) > 'Z')
                 {
-                     ciphertext[ciphertext_index++] =  text[i] 
+                     ciphertext[i] =  text[i] 
                             + value_to_increase - LETTER_COUNT;
                 }
                 else if (
                          islower(text[i]) && (text[i] + value_to_increase) > 'z'
                 )
                 {
-                     ciphertext[ciphertext_index++] = text[i] 
+                     ciphertext[i] = text[i] 
                             + value_to_increase - LETTER_COUNT;
                 } 
                 else
                 {
-                     ciphertext[ciphertext_index++] = text[i] 
+                     ciphertext[i] = text[i] 
                             + value_to_increase;
                 }
+            }
+            else
+            {
+                ciphertext[i] = text[i];
             }    
         }
 
       // terminate string
-      ciphertext[ciphertext_index] = '\0';
+      ciphertext[text_length] = '\0';
 
       free(text);
       
