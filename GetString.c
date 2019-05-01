@@ -14,10 +14,9 @@
 
 
 
-// I added this line to the source code,
+// I added this header to the source code,
 // in the author's code of this line is not present.
 #include "Cipher.h"
-
 
 
 /*

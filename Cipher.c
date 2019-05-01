@@ -13,6 +13,8 @@
  */
 string Cipher(string key, string text)
 {
+    const int LETTER_COUNT = 26;
+	
     if (text != NULL)
     {  
         // Buffer for chars
@@ -23,7 +25,8 @@ string Cipher(string key, string text)
         }
 
         int buffer_index = 0;
-        // key_c is variable for ASCII character in integer value 
+        // The key_c variable to store the value by which to increase
+        // the symbol value.
         int key_c = 0;
 
         // Changes characters of the original text into cipher
@@ -31,12 +34,12 @@ string Cipher(string key, string text)
         {   
             if (isalpha(text[i]))
             {
-                // Each character of the keyword is applied to each text character
-                for (int keyLength = strlen(key); ;)
+                // Get value for key_c
+                for (int keyLength = strlen(key);;)
                 {   
                     if (j == keyLength)
                     {
-                        j = 0;
+                        j = 0;  // Return to the first character of the keyword
                         continue;
                     }
                     else if (isupper(key[j]))
@@ -48,7 +51,7 @@ string Cipher(string key, string text)
                         key_c = (key[j] - 97);
                     }
                     
-                    j++;
+                    j++;  // Next character of keyword.
                     break;
                 }
             }
@@ -69,15 +72,13 @@ string Cipher(string key, string text)
             }
             else
             {   
-                // For an uppercase letter 
                 if (isupper(text[i]) && (text[i] + key_c) > 'Z')
                 {
-                     buffer[buffer_index++] =  text[i] + key_c - 26;
+                     buffer[buffer_index++] =  text[i] + key_c - LETTER_COUNT;
                 }
-                // For an lowercase letter
                 else if (islower(text[i]) && (text[i] + key_c) > 'z')
                 {
-                     buffer[buffer_index++] = text[i] + key_c - 26;
+                     buffer[buffer_index++] = text[i] + key_c - LETTER_COUNT;
                 } 
                 else
                 {
