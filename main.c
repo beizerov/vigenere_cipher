@@ -30,7 +30,7 @@ int main(int argc, string argv[])
     {
         string keyword = argv[1];
     
-        for(int i = 0, n = strlen(keyword); i < n; i++)
+        for(int i = 0; keyword[i] != '\0'; i++)
         {
             if (!(isalpha(keyword[i])))
             {
@@ -39,15 +39,15 @@ int main(int argc, string argv[])
             }
         }  
        
-        string plaintext = GetString();
-       
-        string ciphertext = cipher(keyword, plaintext);
-		
-        if (ciphertext != NULL) 
-        {
-            printf("%s\n", ciphertext);
+        printf("plaintext: ");
 
-            free(ciphertext);
+        string str = GetString();
+		
+        if (str != NULL) 
+        {
+            printf("ciphertext: %s\n", cipher(keyword, str));
+
+            free(str);
         }
     
         return 0;

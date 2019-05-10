@@ -11,32 +11,27 @@
 /*
  * This function encrypts incoming text
  */
-string cipher(string keyword, string plaintext)
+string cipher(string keyword, string str)
 {
     static const int LETTER_COUNT = 26;
 	
-    if (plaintext != NULL)
+    if (str != NULL)
     {  
-        string ciphertext = malloc(strlen(plaintext) + 1);
-
-        if (ciphertext == NULL) {
-            return NULL;
-        }
-
-        int plaintext_length = strlen(plaintext);
+        int str_length = strlen(str);
         // The value_to_increase variable to store the value by which to 
         // increase the character value when encrypting.
         int value_to_increase = 0;
 
         // Changes characters of the plaintext into ciphertext
-        for (int i = 0, j = 0; i < plaintext_length; i++)
+        for (int i = 0, j = 0; i < str_length; i++)
         {   
-            if (isalpha(plaintext[i]))
+            // Shift is used, if only the symbol is a symbol of the alphabet
+            if (isalpha(str[i]))
             {
                 // Get value for value_to_increase
-                for (int keyword_length = strlen(keyword);;)
+                for (;;)
                 {   
-                    if (j == keyword_length)
+                    if (keyword[j] == '\0')
                     {
                         j = 0;  // Return to the first character of the keyword
                         continue;
@@ -55,42 +50,24 @@ string cipher(string keyword, string plaintext)
                 }
             }
 
-            if (isalpha(plaintext[i]))
+            if (isalpha(str[i]))
             {   
-                if (
-                    isupper(plaintext[i]) && (plaintext[i] 
-                        + value_to_increase) > 'Z'
-                )
+                if (isupper(str[i]) && (str[i] + value_to_increase) > 'Z')
                 {
-                     ciphertext[i] =  plaintext[i] 
-                            + value_to_increase - LETTER_COUNT;
+                     str[i] += value_to_increase - LETTER_COUNT;
                 }
-                else if (
-                         islower(plaintext[i]) && (plaintext[i] 
-                            + value_to_increase) > 'z'
-                )
+                else if (islower(str[i]) && (str[i] + value_to_increase) > 'z')
                 {
-                     ciphertext[i] = plaintext[i] 
-                            + value_to_increase - LETTER_COUNT;
+                     str[i] += value_to_increase - LETTER_COUNT;
                 } 
                 else
                 {
-                     ciphertext[i] = plaintext[i] 
-                            + value_to_increase;
+                     str[i] += value_to_increase;
                 }
             }
-            else
-            {
-                ciphertext[i] = plaintext[i];
-            }    
         }
-
-      // terminate string
-      ciphertext[plaintext_length] = '\0';
-
-      free(plaintext);
       
-      return ciphertext;
+      return str;
     }
 
     return NULL;
