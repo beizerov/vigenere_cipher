@@ -17,6 +17,6 @@
 typedef char* string;
 
 string GetString(void);
-string Cipher(string keyword, string text);
+string cipher(string keyword, string plaintext);
 
 #endif //CIPHER_H

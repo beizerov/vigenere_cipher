@@ -16,7 +16,7 @@
 
 // I added this header to the source code,
 // in the author's code of this line is not present.
-#include "Cipher.h"
+#include "cipher.h"
 
 
 /*

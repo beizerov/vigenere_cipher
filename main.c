@@ -5,7 +5,7 @@
 **********************/
 
 
-#include "Cipher.h"
+#include "cipher.h"
 
 
 int main(int argc, string argv[])
@@ -39,9 +39,9 @@ int main(int argc, string argv[])
             }
         }  
        
-        string text = GetString();
+        string plaintext = GetString();
        
-        string ciphertext = Cipher(keyword, text);
+        string ciphertext = cipher(keyword, plaintext);
 		
         if (ciphertext != NULL) 
         {
