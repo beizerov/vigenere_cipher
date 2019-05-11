@@ -5,13 +5,19 @@
 **********************/
 
 
-#include "cipher.h"
+#include "vigenere_cipher.h"
+
+
+/*
+ * This function shift to next character in keyword
+ */
+static int shift(char c);
 
 
 /*
  * This function encrypts incoming text
  */
-string cipher(string keyword, string str)
+string encrypt(string keyword, string str)
 {
     static const int LETTER_COUNT = 26;
 	
@@ -36,13 +42,9 @@ string cipher(string keyword, string str)
                         j = 0;  // Return to the first character of the keyword
                         continue;
                     }
-                    else if (isupper(keyword[j]))
+                    else
                     {
-                        value_to_increase = (keyword[j] - 'A');
-                    }
-                    else if (islower(keyword[j]))
-                    {
-                        value_to_increase = (keyword[j] - 'a');
+                        value_to_increase = shift(keyword[j]);
                     }
                     
                     j++;  // Next character of keyword.
@@ -71,4 +73,17 @@ string cipher(string keyword, string str)
     }
 
     return NULL;
+}
+
+
+static int shift(char c)
+{
+    if (isupper(c))
+    {
+        return c - 'A';
+    }
+    else
+    {
+        return c - 'a';
+    }
 }

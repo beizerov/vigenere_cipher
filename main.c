@@ -5,7 +5,7 @@
 **********************/
 
 
-#include "cipher.h"
+#include "vigenere_cipher.h"
 
 
 int main(int argc, string argv[])
@@ -45,7 +45,7 @@ int main(int argc, string argv[])
 		
         if (str != NULL) 
         {
-            printf("ciphertext: %s\n", cipher(keyword, str));
+            printf("ciphertext: %s\n", encrypt(keyword, str));
 
             free(str);
         }

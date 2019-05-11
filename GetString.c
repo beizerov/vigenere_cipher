@@ -16,7 +16,7 @@
 
 // I added this header to the source code,
 // in the author's code of this line is not present.
-#include "cipher.h"
+#include "vigenere_cipher.h"
 
 
 /*
