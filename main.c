@@ -10,7 +10,7 @@
 
 int main(int argc, string argv[])
 {
-    // Check input data
+    // Validation of data entry.
     if (argc > 2)
     {
         printf("A lot of arguments!\n");

@@ -8,16 +8,15 @@
 #include "vigenere_cipher.h"
 
 
-/*
- * This function shift to next character in keyword
- */
-static int shift(char c);
+static int shift(const char* const keyword);
 
 
 /*
- * This function encrypts incoming text
+ *  This function encrypts incoming text.
+ * Takes two parameters keyword and plaintext for encrypt.
+ * Return a reference on ciphertext.
  */
-string encrypt(string keyword, string str)
+string encrypt(const char* const keyword, char* const str)
 {
     static const int LETTER_COUNT = 26;
 	
@@ -29,31 +28,13 @@ string encrypt(string keyword, string str)
         int value_to_increase = 0;
 
         // Changes characters of the plaintext into ciphertext
-        for (int i = 0, j = 0; i < str_length; i++)
+        for (int i = 0; i < str_length; i++)
         {   
-            // Shift is used, if only the symbol is a symbol of the alphabet
-            if (isalpha(str[i]))
-            {
-                // Get value for value_to_increase
-                for (;;)
-                {   
-                    if (keyword[j] == '\0')
-                    {
-                        j = 0;  // Return to the first character of the keyword
-                        continue;
-                    }
-                    else
-                    {
-                        value_to_increase = shift(keyword[j]);
-                    }
-                    
-                    j++;  // Next character of keyword.
-                    break;
-                }
-            }
-
             if (isalpha(str[i]))
             {   
+                // Shift is used, if only the symbol is a symbol of the alphabet
+                value_to_increase = shift(keyword);
+
                 if (isupper(str[i]) && (str[i] + value_to_increase) > 'Z')
                 {
                      str[i] += value_to_increase - LETTER_COUNT;
@@ -76,14 +57,28 @@ string encrypt(string keyword, string str)
 }
 
 
-static int shift(char c)
+/*
+ *  This function shift to next character in keyword 
+ * and return value from 0 to 25, like from A to Z. 
+ *
+ * A == 0, Z == 25.
+ * Letter case not have matter.
+ */
+static int shift(const char* const keyword)
 {
-    if (isupper(c))
+    static int j = 0;
+
+    if (keyword[j] == '\0')
     {
-        return c - 'A';
+        j = 0;  // Return to the first character of the keyword
+    }    
+
+    if (isupper(keyword[j]))
+    {
+        return keyword[j++] - 'A';
     }
     else
     {
-        return c - 'a';
+        return keyword[j++] - 'a';
     }
 }

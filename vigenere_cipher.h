@@ -17,6 +17,6 @@
 typedef char* string;
 
 string GetString(void);
-string encrypt(string keyword, string str);
+string encrypt(const char* const keyword, char* const str);
 
 #endif //CIPHER_H
