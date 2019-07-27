@@ -12,9 +12,9 @@ static int shift(const char* const keyword);
 
 
 /*
- *  This function encrypts incoming text.
- * Takes two parameters keyword and plaintext for encrypt.
- * Return a reference on ciphertext.
+ *  This feature encrypts incoming text.
+ * Accepts two parameters: a keyword and plaintext for encryption.
+ * The function returns a pointer to the cipher text.
  */
 string encrypt(const char* const keyword, char* const str)
 {
@@ -23,16 +23,16 @@ string encrypt(const char* const keyword, char* const str)
     if (str != NULL)
     {  
         int str_length = strlen(str);
-        // The value_to_increase variable to store the value by which to 
-        // increase the character value when encrypting.
+        // Variable value_to_increase to store the value by which 
+        // the value of the character is increased during encryption.
         int value_to_increase = 0;
 
-        // Changes characters of the plaintext into ciphertext
+        // Changes plaintext characters to encrypted
         for (int i = 0; i < str_length; i++)
         {   
             if (isalpha(str[i]))
             {   
-                // Shift is used, if only the symbol is a symbol of the alphabet
+                // Shift is used only if the character is an alphabet character.
                 value_to_increase = shift(keyword);
 
                 if (isupper(str[i]) && (str[i] + value_to_increase) > 'Z')
@@ -58,8 +58,8 @@ string encrypt(const char* const keyword, char* const str)
 
 
 /*
- *  This function shift to next character in keyword 
- * and return value from 0 to 25, like from A to Z. 
+ *  This function shift to the next character in the keyword 
+ * and return a value from 0 to 25, like from A to Z. 
  *
  * A == 0, Z == 25.
  * Letter case not have matter.
