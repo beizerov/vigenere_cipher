@@ -18,7 +18,7 @@ static int shift(const char* const keyword);
  */
 string encrypt(const char* const keyword, char* const str)
 {
-    static const int LETTER_COUNT = 26;
+    const int LETTER_COUNT = 26;
 	
     if (str != NULL)
     {  
