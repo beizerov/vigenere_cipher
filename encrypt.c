@@ -58,7 +58,7 @@ string encrypt(const char* const keyword, char* const str)
 
 
 /*
- *  This function shift to the next character in the keyword 
+ *  This function shifts to the next character in the keyword 
  * and return a value from 0 to 25, like from A to Z. 
  *
  * A == 0, Z == 25.
@@ -70,7 +70,7 @@ static int shift(const char* const keyword)
 
     if (keyword[j] == '\0')
     {
-        j = 0;  // Return to the first character of the keyword
+        j = 0;  // Set up the index into the beginning character of the keyword
     }    
 
     if (isupper(keyword[j]))
